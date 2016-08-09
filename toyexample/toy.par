@@ -1,0 +1,40 @@
+# This is a toy example to illustrate sbvb file formats
+
+# cat  toy.gen | sbvb -i toy.par
+# toy.gen contains 5 SNPs in two chrs for 3 individuals
+
+NBASE    !--> nind which genotypes are read from STDIN
+3
+H2       !--> desired heritability
+0.5
+
+# not needed if one trait
+NTRAIT
+1
+
+# contains two QTN with additive effects , dominance=0
+QTNFILE      !--> file with qtl posns (chr & bp) add & dom effects can be defined in cols 3 & 4
+toy.qtn
+
+# pedigree file with 10 individuals
+PEDFILE
+toy.ped
+
+# array file
+SNPFILE  !--> file with genotyped snps: chr, bp
+toy.chip
+
+# recombination map,
+# specifies only for chr 1, xover rate in chr 2 is default (1 cM / Mb)
+MAPFILE  !--> recomb map file: chr, basepos, cm2Mb [cm2Mb_sex2]
+toy.map
+
+OUTGFILE !--> GRM outfile
+toy.grm
+OUTQFILE !--> output qtl file
+toy.outq
+OUTYFILE !--> y outfile
+toy.outy
+OUTMFILE !--> file with mkr data
+toy.outm
+

@@ -1,76 +1,6 @@
 ! add NPAR ?
 ! gamma  S = SHAPE PARAMETER OF DISTRIBUTION (0 < REAL).
 !        B = Scale parameter
-! 2016/08/09 15:12:30 : check ve>0 can be met
-! 2016/08/08 14:54:35 : detects nf=13 in epifile for ntrait=1
-! bug in read_pos
-! 2016/03/22 13:09:31 : allows controlling first indiv to write G, mkr and y
-! 2016/03/16 16:41:40 : controls max no of xovers MXOVER section
-! 2016/03/09 12:44:08 : GZIP compresses gwas and mkr files
-! 2016/03/08 09:15:28 : GWASFILE: prints regression coeff & b/se
-!                       checks H2BYCOL requires FRQBYCOL
-! 2016/03/03 12:41:15 : option OLDHAP reads old hap files where no dom and epi were written
-!                       correction in computing s2e con h2 y h2g
-! 2016-03-02 16:59:59 : bug in getting ve
-! 2016/03/01 17:03:38 : bug in init_g for sexchr
-!                       ybv file is y, tbv, tbv+dom, tbv+dom+epi
-!                       hap file is y, tbv, dom, epi
-! 2016/02/29 16:20:05 : modify dogenotypes to save memory
-!                       error in init gf%h2 / h2g
-! 2016/02/26 10:53:06 : epistasis modeled via epifile
-!                       ULL: tbv does not include the epistatic component
-!                       ybv file is y, tbv+epi, tbv ; tbv includes add+dom
-! 2016/02/24 12:20:21 : multiple traits
-!                       ULL hapfile fomat includes no. of traits in header
-!                       check if sex missing
-! 2016/01/27 15:51:33: sex chrs
-!                      requires id field sex, takes first allele in X male chrs
-!                      check sortcor and rm zeros
-! 2016/01/25 18:07:00: small init bug when not restartql, hapfile format changed slightly
-! 2016/01/19 16:00:07: small bug in reading hap when h2bycol
-!                      no overdomininance by default
-! ok read complete path files with '(a)' format
-! ok expand_nbase and qtlrestart
-! allows for base population expansion
-! v6 allow for constant h2 across breeds by diff ve
-! bug in computing vg, divide by nind instead of nbase
-! print qtl freqs for whole pedigree and by class in pedigree file
-! error in reading hap when restartqtl
-! small rearrangement in computing missing snps
-! RESTARTQTL simulate qtl conditional on pedigree (disregard hap information)
-!    several parts restructured
-! allow for correlation btw freq and effect RHOQA
-! print seed
-! set recs btw 1 and 3: Mercier et al 2015. Ann Rev Plant Biol
-! allow for sex specific rec rates
-! include blas
-! output in tped & tfam plink format for GWAS (option OUTPLINK)
-! optimizes computing GRM
-! v2: allows for several chip files (up to 9), decide on options useseq, etc
-! check qtl and snp files
-! remove fixed snps when reading vcf
-! ok outhap and inhap files are now equal
-! ok ULL error in gt sum as declared integer 1
-! ok optimize memory in reading snps from vcf
-! ok optimizes memory with integer(kind=1) in genotype arrays
-! ok guess max no. SNPs in parfile! allows for undefined snp or qtl positions
-! ok program print output: mkr: check. dochip, replace printchip by printmkr
-! ok check binary traits
-! ok allow for larger than last snp position in defining rec maps
-! ok print grm
-! ok haplotype reading and writing, check if y already generated, read y, tbv
-! ok read previous haplotypes, this should allow running sbvb several times
-! ok allocate memory dynamically when reading genotypes
-! ok check meaining of sign qtl
-! ok check local and general variables
-! OK allow for unequal rec rates, move map into %
-! ok check dogenotype, program qtl effects, read qtlpos
-! ok generate qtl effects (see ms2gs)
-! ok new type for gfounder
-! ok get qtl origin in mpeiosic
-! ok check meiosis, do we need ipos? 
-! ok modify mpeiosic for chr%ipos
-
 !----------------------------------------------------------------------------------------!
 !                            Sequence Based Virtual Breeding                             !
 !------                                                                           -------!
@@ -245,7 +175,7 @@
                   gwasfile=' '
   character*90, &
    allocatable :: snpfile(:)
-  integer      :: nbase, nind, ncol, frqcol=0, maxclass=0, expand_t=0, &
+  integer      :: nbase=0, nind=0, ncol, frqcol=0, maxclass=0, expand_t=0, &
                   expand_nfam=0, indfirst=1
   logical      :: printgrm=.false., printmkr=.false., useseq=.true., &
                   printqtl=.false., printhap=.false., plink=.false., &
@@ -599,7 +529,13 @@
  if(.not.associated(gf%qdistd)) then
     allocate(gf%qdistd(gf%ntrait)); gf%qdistd(:)%f=' '
  endif
- 
+
+ if(wc(info%qtlfile)==0) STOP 'QTNFILE not specified or empty'
+
+ if(info%nind==0) STOP 'NIND=0, likely pedfile not specified or empty'
+
+ if(info%nbase==0) STOP 'NBASE must be specified (no. inds in vcf file)'
+
  if(associated(gf%h2) .and. .not. associated(gf%h2g) ) then
     allocate(gf%h2g(gf%ntrait))
     gf%h2g=0.

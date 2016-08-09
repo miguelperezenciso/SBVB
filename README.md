@@ -32,7 +32,7 @@ test.ped
 
 specifies that the pedigree file is 'test.ped'. 
 
-For a complete help, check the manual file, and file README.sbvb. 
+For a complete help, check the [manual file](https://github.com/mperezenciso/sbvb0/blob/master/SBVB_manual.pdf), and file README.sbvb. 
 
 ##### Input files
 PEDFILE: a pedigree file (required)

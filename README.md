@@ -28,7 +28,6 @@ zcat file.vcf.gz | perl vcf2tped2.pl -hap | cut -d ' ' -f 1,4- | sbvb -isbvb.par
 All sbvb is controlled via a parameter file with sections in UPPERCASE, e.g.,
 
 PEDFILE
-
 test.ped
 
 specifies that the pedigree file is 'test.ped'. 

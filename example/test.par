@@ -1,0 +1,44 @@
+# cat  test.vcf | perl vcf2tped2.pl -hap | cut -d ' ' -f 1,4-|../src/sbvb -i test.par
+# cat  test.vcf | perl vcf2tped2.pl -hap | cut -d ' ' -f 1,4- > test.gen
+# cat  test.gen |../src/sbvb -i test.par
+
+NBASE    !--> nind which genotypes are read from STDIN 
+205
+H2       !--> heritability
+0.5
+
+NTRAIT
+1
+SEXCHR
+1
+QTNFILE      !--> file with qtl posns (chr & bp) add & dom effects can be defined in cols 3 & 4
+test.qtn
+EPIFILE
+test.epi
+PEDFILE
+test.ped
+SNPFILE  !--> file with genotyped snps: chr, bp
+test.chip 
+MAPFILE  !--> recomb map file: chr, basepos, cm2Mb [cm2Mb_sex2]
+test.map
+
+RESTART  !--> prepares files for new run of sbvb, and uses hap file if present
+HAPFILE  !--> hap structure so program can be restarted with RESTART or RESTARQTL
+test.hap
+OUTGFILE !--> GRM outfile
+test.grm 
+OUTQFILE !--> output qtl file
+test.outq
+OUTYFILE !--> y outfile
+test.outy 
+OUTMFILE !--> file with mkr data
+test.outm
+
+PSIGNQTN  !--> P of derived allele being deleterious (only with gamma) [0.5]
+0.5
+QTLDISTA  !--> QTL add effects are sampled from a distribution: u(niform), g(amma), n(ormal)
+g 0.2 0.2
+#QTLDISTD  !--> No dominance is simulated
+g 0.2 0.2
+
+

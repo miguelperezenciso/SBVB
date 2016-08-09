@@ -1,0 +1,39 @@
+# cat  test.vcf | perl vcf2tped2.pl -hap | cut -d ' ' -f 1,4-|../src/sbvb -i test.par
+# cat  test.vcf | perl vcf2tped2.pl -hap | cut -d ' ' -f 1,4- > test.gen
+# cat  test.gen |../src/sbvb -i test.par
+
+NBASE    !--> nind which genotypes are read from STDIN 
+205
+
+RESTARTQTL
+HAPFILE
+test.hap
+
+NTRAIT
+2
+H2        !--> heritability
+0.5
+0.25
+SEXCHR
+1
+QTNFILE      !--> file with qtl posns (chr & bp) add & dom effects can be defined in cols 3 & 4
+test2.qtn
+EPIFILE
+test2.epi
+PEDFILE
+test.ped
+SNPFILE  !--> file with genotyped snps: chr, bp
+test.chip 
+MAPFILE  !--> recomb map file: chr, basepos, cm2Mb [cm2Mb_sex2]
+test.map
+
+OUTGFILE !--> GRM outfile
+test2.grm
+OUTQFILE !--> output qtl file
+test2.outq
+OUTYFILE !--> y outfile
+test2.outy 
+OUTMFILE !--> file with mkr data
+test2.outm
+# NOTE: if RESTART option used, check that *outm files are identical between the test.par and test2.par analyses
+

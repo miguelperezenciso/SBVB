@@ -1,0 +1,72 @@
+# sbvb (Sequence Based Virtual Breeding)
+# comments can be included as this 
+! or as this
+# USAGE:
+#    zcat file.vcf.gz | perl vcf2tped2.pl -hap | cut -d ' ' -f 1,4- | ./sbvb -i sbvb.par
+# 
+NTRAIT      !--> [1]
+ntrait
+NBASE       !--> no. individuals in vcf file 
+nbase 
+NCHR        !—> max no. of chromosomes [18]
+maxnchr 
+SEXCHR
+sexchr   
+
+QTLFILE     !--> file with qtl posns (chr & bp) add & dom effects can be defined in cols 3 & 4
+qtlfile
+EPIFILE
+epifile
+PEDFILE
+pedfile
+SNPFILE    !--> file with genotyped snps: chr, bp, can be repeated
+snpfile 
+MAPFILE    !--> recomb map file: chr, basepos, cm2Mb [cm2Mb_sex2]
+mapfile
+HAPFILE    !--> hap structure so program can be restarted with RESTART
+hapfile 
+OUTPLINK   !--> prints mkr in plink format
+OUTGFILE   !--> GRM outfile
+outgfile 
+OUTQFILE   !--> output qtl file
+out_q_file
+OUTYFILE   !--> y outfile
+outyfile 
+OUTMFILE   !--> output file with mkr data
+outmfile
+GZIP       !--> compress output files
+
+H2         !--> heritability 
+h2
+H2G        !--> broad heritability (only either H2 or H2G must be used)
+h2g
+SIGNQTL    !--> P of derived allele being deleterious (only with gamma) [0.5]
+p_sign_qtl
+RHOQA      !--> desired correlation between allele effect and frequency
+rhoq
+BINARY     !--> incidence if binary trait (not implemented yet)
+p
+QTLDISTA   !--> QTL add effects are sampled from a distribution: u(niform), g(amma), n(ormal)
+[u, l_bound, u_bound], [n, mu, var], [g, s, b]
+QTLDISTD   !--> QTL dom effects are sampled from a distribution
+[u, l_bound, u_bound], [n, mu, var], [g, s, b]
+
+CM2MB      !--> cM to Mb rate, default cm2mb [1.0]
+cm2mb
+MXOVER     !--> Max no xovers, default 3
+mxover
+
+FRQBYCOL   !--> computes snp and qtl effects by level in column col of pedfile
+col
+H2BYCOL    !--> specifies var e by level in col (say by breed) to make h2 constant
+col
+
+
+RESTART     !--> prepares files for new run of sbvb
+RESTARTQTL  !--> restart qtl effects but keeps haplotype structure
+NOPRINTHAP  !--> does not print hap file, eg, if no new haplotypes have been generated
+NOSEQUENCE  !--> does not use sequence for GRM, 
+EXPAND_BASEPOP  !--> breeds new base individuals involving random mating for ntgen generations from nfam families
+ntgen nfam
+
+

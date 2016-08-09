@@ -28,24 +28,25 @@ zcat file.vcf.gz | perl vcf2tped2.pl -hap | cut -d ' ' -f 1,4- | sbvb -isbvb.par
 All sbvb is controlled via a parameter file with sections in UPPERCASE, e.g.,
 
 PEDFILE
+
 test.ped
 
 specifies that the pedigree file is 'test.ped'. 
 
-For a complete help, check the [manual file](https://github.com/mperezenciso/sbvb0/blob/master/SBVB_manual.pdf), and file README.sbvb. 
+For a complete help, check the [manual file](https://github.com/mperezenciso/sbvb0/blob/master/SBVB_manual.pdf), and file [README.sbvb] (https://github.com/mperezenciso/sbvb0/blob/master/src/README.sbvb). 
 
 ##### Input files
-PEDFILE: a pedigree file (required)
-QTNFILE: a file with causal SNP positions (required)
-EPIFILE: controls epistasis (optional)
-SNPFILE: a file with a list of SNP positions in an array (up to 9 arrays can be analyzed simultaneously)
-MAPFILE: controls local recombination rates (optional)
+PEDFILE: a pedigree file (required) [toy example] (https://github.com/mperezenciso/sbvb0/blob/master/toyexample/toy.ped)
+QTNFILE: a file with causal SNP positions (required) [toy example] (https://github.com/mperezenciso/sbvb0/blob/master/toyexample/toy.qtn)
+EPIFILE: controls epistasis (optional) [example](https://github.com/mperezenciso/sbvb0/blob/master/example/test.epi)
+SNPFILE: a file with a list of SNP positions in an array (up to 9 arrays can be analyzed simultaneously) [toy example](https://github.com/mperezenciso/sbvb0/blob/master/toyexample/toy.chip)
+MAPFILE: controls local recombination rates (optional) [toy example](https://github.com/mperezenciso/sbvb0/blob/master/toyexample/toy.map)
 
 ##### Output files
-OUTYFILE: phenotypes and genetic values per individual
-OUTQFILE: QTN frequencies and ascribed variances
-OUTGFILE: GRM files
-OUTMFILE: Marker genotypes, optionally in Plink format
+OUTYFILE: phenotypes and genetic values per individual [toy example](https://github.com/mperezenciso/sbvb0/blob/master/toyexample/toy.outy)
+OUTQFILE: QTN frequencies and ascribed variances [toy example](https://github.com/mperezenciso/sbvb0/blob/master/toyexample/toy.outq)
+OUTGFILE: GRM files [toy example](https://github.com/mperezenciso/sbvb0/blob/master/toyexample/toy.grm.1)
+OUTMFILE: Marker genotypes, optionally in Plink format [toy example](https://github.com/mperezenciso/sbvb0/blob/master/toyexample/toy.outm.0)
 
 ##### Controling genetic architecture
 This is accomplished with QTNFILE and EPIFILE. If QTN effects are not specified in QTNFILE, they can be simulated from uniform, normal or gamma, specified in sections QTNDISTA and QTNDISTD. Narrow or broad sense heritabiilities are controlled with H2 or H2G respectively. SBVB obtains actual genetic variances from individuals in base population and adjusts var e accordingly.
@@ -63,10 +64,10 @@ Sometimes one can be interested in running the same experiment but with differen
 
 The program then writes a *hap file that contains all haplotype structure the first time is run.
 
-### Toy example
+### [Toy example]
 This folder contains simplest example to check sbvb format files
 
-### Example
+### [Example]
 Contains an example consisting of 100 SNPs from the X chromosome of 205 lines from drosophila reference panel (http://dgrp2.gnets.ncsu.edu). 
 
 ### Citation

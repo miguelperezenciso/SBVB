@@ -1,4 +1,3 @@
-! add NPAR ?
 ! gamma  S = SHAPE PARAMETER OF DISTRIBUTION (0 < REAL).
 !        B = Scale parameter
 !----------------------------------------------------------------------------------------!

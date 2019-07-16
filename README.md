@@ -71,4 +71,4 @@ This folder contains simplest example to check sbvb format files
 Contains an example consisting of 100 SNPs from the X chromosome of 205 lines from drosophila reference panel (http://dgrp2.gnets.ncsu.edu). 
 
 ### Citation
-M. Perez-Enciso, N. Forneris, G. de los Campos, A. Legarra. An efficient new simulator predicts minimal advantage of full sequence for genomic prediction. Submitted.
+M. Perez-Enciso, N. Forneris, G. de los Campos, A. Legarra. 2017. An efficient new simulator predicts minimal advantage of full sequence for genomic prediction. Genetics, 205:939-953. doi: 10.1534/genetics.116.194878
